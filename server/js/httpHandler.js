@@ -14,7 +14,18 @@ module.exports.initialize = (queue) => {
 
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
+  if (req.method === 'GET') {
+    if (req.url === '/') 
+    //dequeue message
+    if (messageQueue.length > 0) {
+      res.end(messageQueue.dequque()); //left off here <------------
+    } else {
+      res.end()
+    }
+    //send to client
+  } else {
+
+  }
   res.writeHead(200, headers);
   res.end();
   next(); // invoke next() at the end of a request to help with testing!
-};

@@ -17,6 +17,7 @@ const logKeypress = (key) => {
   // when not in raw mode, the terminal will do this for us
   if (process.stdin.isRaw) {
     process.stdout.write(key);
+    console.log('Presskey')
   }
 };
 

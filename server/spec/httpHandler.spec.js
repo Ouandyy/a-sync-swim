@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const expect = require('chai').expect;
 const server = require('./mockServer');
-
+const queue = require('../js/messageQueue')
 const httpHandler = require('../js/httpHandler');
 
 
@@ -23,7 +23,16 @@ describe('server responses', () => {
 
   it('should respond to a GET request for a swim command', (done) => {
     // write your test here
-    done();
+    let {req, res} = server.mock('/', 'GET');
+    let directions = ['up', 'down', 'left', 'right'];
+    let randDirection = directions[Math.floor(Math.random() * directions.length)];
+    queue.enqueue(randDirection)
+    httpHandler.router(req, res, () => {
+      expect(res._responseCode).to.equal(200);
+      expect(res._ended).to.equal(true);
+      done();
+    });
+
   });
 
   xit('should respond with 404 to a GET request for a missing background image', (done) => {
