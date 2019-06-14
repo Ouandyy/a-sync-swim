@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const headers = require('./cors');
 const multipart = require('./multipartUtils');
+const messages = require('./messageQueue')
+
 
 // Path for the background image ///////////////////////
 module.exports.backgroundImageFile = path.join('.', 'background.jpg');
@@ -15,18 +17,18 @@ module.exports.initialize = (queue) => {
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
   if (req.method === 'GET') {
-    if (req.url === '/') 
-    //dequeue message
-    if (messageQueue.length > 0) {
-      res.end(messageQueue.dequque()); //left off here <------------
-    } else {
-      res.end()
+    if (req.url === '/') {
+      let direction = messages.dequeue(messages.messages)
+      res.writeHead(200, headers);
+      res.end(direction);
+      next()
+      } else {
+        res.end()
+        next()
+      }
     }
-    //send to client
-  } else {
-
-  }
   res.writeHead(200, headers);
   res.end();
   next(); // invoke next() at the end of a request to help with testing!
 }
+
