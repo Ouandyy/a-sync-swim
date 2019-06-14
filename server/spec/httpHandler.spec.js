@@ -2,8 +2,17 @@
 const fs = require('fs');
 const path = require('path');
 const expect = require('chai').expect;
+//server.mock takes 3 peram url, method, postdata
+//server will output new request and new response
 const server = require('./mockServer');
-const queue = require('../js/messageQueue')
+// queue has two methods
+// enqueue - message as argument, message is push to array, then console.log
+// dequeue - return message and shift from message array.
+const queue = require('../js/messageQueue');
+//has 3 methods
+//backgroundImageFile - path for background image
+//initialize - queue as arg, messageQueue = queue
+//router - (req, resp, callback)
 const httpHandler = require('../js/httpHandler');
 
 
