@@ -1,28 +1,52 @@
-(function() {
+(function () {
 
   const serverUrl = 'http://127.0.0.1:3000';
 
-  
+
   //
   // TODO: build the swim command fetcher here
   //
 
-  $.ajax({
-    type: 'GET',
-    url: serverUrl,
-    success: (data) => {
-      SwimTeam.move(data) 
-    },
-    error: () => {
-      console.log('error')
-    }
-  })
+  const directionFetch = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      contentType: 'text/plain',
+      success: (data) => {
+        SwimTeam.move(data)
+      },
+      error: () => {
+        console.log('error')
+      }
+    })
+  }
+
+  directionFetch();
+
+  // const clientPoster = () => {
+  //   $.ajax({
+  //     type: 'POST',
+  //     data: direction.toLowerCase(),
+  //     url: serverUrl,
+  //     cache: false,
+  //     contentType: false,
+  //     processData: false,
+  //     error: () => {
+  //       console.log('error')
+  //     },
+  //     success: () => {
+  //       console.log('great success')
+  //       // reload the page
+  //       window.location = window.location.href;
+  //     }
+  //   });
+  // }
   //background image get request
-  $.ajax({
-    type: 'GET',
-    url: serverUrl, ///<----image url
-    dataType //<====? image?
-  })
+  // $.ajax({
+  //   type: 'GET',
+  //   url: serverUrl, ///<----image url
+  //   dataType //<====? image?
+  // })
 
   //for the sucess section of our next ajax request
   //instead css updated background image
@@ -50,7 +74,7 @@
     });
   };
 
-  $('form').on('submit', function(e) {
+  $('form').on('submit', function (e) {
     e.preventDefault();
 
     var form = $('form .file')[0];
