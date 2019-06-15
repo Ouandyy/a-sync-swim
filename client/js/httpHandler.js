@@ -16,8 +16,11 @@
     error: () => {
       console.log('error')
     }
-
   })
+
+  //for the sucess section of our next ajax request
+  //instead css updated background image
+  //$('.div_image').html('<img src="data:image/png;base64,' + data + '" />')
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
