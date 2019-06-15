@@ -11,11 +11,17 @@
     type: 'GET',
     url: serverUrl,
     success: (data) => {
-      SwimTeam.move(data)
+      SwimTeam.move(data) 
     },
     error: () => {
       console.log('error')
     }
+  })
+  //background image get request
+  $.ajax({
+    type: 'GET',
+    url: serverUrl, ///<----image url
+    dataType //<====? image?
   })
 
   //for the sucess section of our next ajax request
