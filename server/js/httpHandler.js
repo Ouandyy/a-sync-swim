@@ -27,9 +27,10 @@ module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
   if (req.method === 'GET') {
     if (req.url === '/') {
-      let direction = messages.dequeue(messages.messages)
+      // let direction = messages.dequeue(messages.messages) 
       res.writeHead(200, headers);
-      res.end(direction);
+      res.end(JSON.stringify(messages.messages));
+      messages.messages = [];
       next()
     } 
   } if (req.method === 'POST') {

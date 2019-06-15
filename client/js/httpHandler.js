@@ -12,8 +12,10 @@
       type: 'GET',
       url: serverUrl,
       contentType: 'text/plain',
-      success: (data) => {
-        SwimTeam.move(data)
+      success: (array) => {
+        JSON.parse(array).forEach(function(ele, i) {
+          setTimeout(() => (SwimTeam.move(ele)), 100*i)
+        })
       },
       error: () => {
         console.log('error')
@@ -21,7 +23,7 @@
     })
   }
 
-  directionFetch();
+  directionFetch(); //wrap in settimeout instead of getting in success case 
 
   // const clientPoster = () => {
   //   $.ajax({
